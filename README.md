@@ -17,7 +17,7 @@ Here’s a demo of the **JavaScript Multistep Form**:
 
 ![Demo Image](demo.png)
 
-You can try the live demo of the form [here](https://github.com/sajida-dev/Multi-step-Javascript-form/raw/main/demo.png).
+You can try the live demo of the form [here](https://sajida-dev.github.io/Multi-step-Javascript-form/).
 
 ## Installation
 To use the **JavaScript Multistep Form** locally:
