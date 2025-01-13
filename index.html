@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="ue-logo.png" type="image/x-icon">
+    <title>SignUp - Select Your Plan</title>
+    <style>
+        body{
+            background-color:rgb(234, 236, 245);
+            width: auto;
+            height: 100%;
+        }
+        #signUp{
+            background-color: white;
+            width: 70%;
+            margin: 3% 12%;
+            border-radius: 20px;
+            padding: 1%;
+            font-family: sans-serif;
+        }
+        #menue{
+            width: 35%;
+            border-radius: 10px;
+            background-size: cover;
+            background-image: linear-gradient( rgb(5, 72, 160), rgba(54, 61, 157, 0.803) , rgba(138, 146, 212, 0.864) , rgba(133, 196, 221, 0.88));
+            padding: 5% 1% 25% 1%;
+            float: left;
+        }
+        .no_selector{
+            padding: 3% 5%;
+            border-radius:25px;
+            border: 2px solid white;
+            float: left;
+            margin: 5% 5%;
+            color: white;
+        }
+        h4,p{
+            margin: 2px;
+        }
+        .selector_details{
+            float: left;
+            padding: 3% 1%;
+            color: white;
+        }
+        #details{
+            width: 60%;
+            float: left;
+            margin-left: 2%;
+        }
+        .menue_detail{
+            display: none;
+            padding:5% 10%;
+            color: gray;
+        }
+        #personal_detail{
+            display: block;
+        }
+        .color{
+            color: navy;
+        }
+        #info_selector{
+            background-color: navy;
+        }
+        .menue_detail>h1{
+            color: navy;
+            margin: 3% 0px;
+        }
+        #personal_info{
+            margin:7% 3% 1% 3%;
+        }
+        #personal_info>input{
+            padding: 4%;
+            border: lightgrey solid 1px;
+            border-radius: 7px;
+            margin:1% 3% 5% 3%;
+            width: 85%;
+            font-size: 15px;
+            outline: none;
+        }
+        ::placeholder{
+            color: gray;
+        }
+        #personal_info>label{
+            margin:5% 1% 5% 5%;
+        }
+        #personal_info>span{
+            color: red;
+        }
+        button{
+            padding: 15px 35px;
+            border-radius: 10px;
+            border: none;
+        }
+        #back_next_button{
+            padding: 5% 0%;
+        }
+        #back{
+            float: left;
+        }
+        #next,#confirm{
+            float: right;
+            background-color: rgba(14, 14, 70, 0.841);
+            color: white;
+        }
+        #plan_detail img{
+            width: 50px;
+            margin: 1% 1% 10% 1%;
+            border-radius: 25px;
+        }
+        #monthly,#yearly{
+            margin: 7% 1%;
+            /* display: block; */
+        }
+        .monthly_option>p,.monthly_option>h4,.yearly_option>p,.yearly_option>h4{
+            padding: 3%;
+        }
+        .plan_time{
+            display: none;
+        }
+        .monthly_option,.yearly_option{
+            display: inline-block;
+            margin: 1%;
+            width: 25%;
+            border: 1px solid gray;
+            border-radius: 5px;
+            padding: 2%;
+        }
+        #selector{
+            background-color: rgba(210, 208, 208, 0.718);
+            padding: 2%;
+            width: 90%;
+            margin: 2% 1%;
+        }
+        #selector>button{
+            margin: 0% 7%;
+            background-color: rgba(254, 251, 251, 0.802);
+        }
+        #monthly{
+            display: block;
+        }
+        #selector>#mon{
+            background-color: navy;
+            color: white;
+        }
+        #toogle_out{
+            background-color: navy;
+            border-radius: 20px;
+            padding: 2% 7% 2% 1%; 
+            transition: 1s;
+        }
+        #toogle_in{
+            background-color: white;
+            border-radius: 20px;
+            padding: 1%;
+            position: relative;
+        }
+        #all_services{
+            margin-top: 7%;
+        }
+        #all_services>button{
+            width: 90%;
+            background: none;
+            border: 1px solid gray;
+            margin: 2%;
+            height: 90px;
+        }
+        .check_box,.services_detail{
+            float: left;
+            margin:1% 3%;
+        }
+        .check_box{
+            margin-top: 7%;
+        }
+        .services_detail>h3{
+            text-align: left;
+            color: black;
+            margin-bottom: 5px;
+            margin-top: 10px;
+        }
+        .services_detail>label{
+            color: gray;
+        }
+        .service_amount{
+            margin: 10% 5% 7% 5%;
+            float: right;
+        }
+        #summary_table{
+            height: auto;
+            width: 85%;
+        }
+        table{
+            margin: 10% 0%;
+            background-color: aliceblue;
+            border-radius: 15px;
+            padding:5% 3%;
+        }
+        td{
+            width: 90%;
+            border-bottom: 2px solid rgb(195, 190, 190);
+            padding: 2% 0%;
+        }
+        /* .monthly_option>div{
+            background-color: aqua;
+        } */
+    </style>
+</head>
+<body>
+    <div id="signUp">
+         <!-- ************************************ menue selector ***************************************** -->
+        <div id="menue">
+            <div id="info">
+                <div class="no_selector" id="info_selector">1</div>
+                <div class="selector_details">
+                    <p id="info_p" class="color">Step 1</p>
+                    <h4 id="info_h" class="color">YOUR INFO</h4>
+                </div>
+                <div style="clear: both;"></div>
+            </div>
+            <div id="plan">
+                <div class="no_selector" id="plan_selector" >2</div>
+                <div class="selector_details">
+                    <p id="plan_p">Step 2</p>
+                    <h4 id="plan_h">SELECT YOUR PLAN</h4>
+                </div>
+                <div style="clear: both;"></div>
+            </div>
+            <div id="add_ons">
+                <div class="no_selector" id="ons_selector">3</div>
+                <div class="selector_details">
+                    <p id="ons_p">Step 3</p>
+                    <h4 id="ons_h">ADD_ONS</h4>
+                </div>
+                <div style="clear: both;"></div>
+            </div>
+            <div id="summary">
+                <div class="no_selector" id="summary_selector">4</div>
+                <div class="selector_details">
+                    <p id="summary_p">Step 4</p>
+                    <h4 id="summary_h">SUMMARY</h4>
+                </div>
+                <div style="clear: both;"></div>
+            </div>
+        </div>
+        <div id="details">
+            <!-- ******************************************  personal_detail  ********************************** -->
+            <div id="personal_detail" class="menue_detail">
+                <h1>Personal info</h1>
+                <p>Please provide your name, email address and phone number.</p>
+                <div id="personal_info">
+                    <label for="name">Full Name</label><span>*</span>
+                    <span id="name_error"></span>
+                    <input type="text" id="name" placeholder="e.g. Sultan Ahmad" required onchange="nameError()">
+                    <label for="email">Email Address</label><span>*</span>
+                    <span id="email_error"></span>
+                    <input type="email" placeholder="e.g. example@gmail.com" id="email" onkeyup="emailError()" required>
+                    <label for="phoneNumber">Phone Number</label><span>*</span>
+                    <span id="phoneNo_error"></span>
+                    <input type="number" id="phoneNumber" placeholder="e.g. +92 300 7784807" onkeyup="phoneNoError()" required>
+                </div>
+                <div id="back_next_button">
+                    <button id="next" onclick="display_plan_and_hide_personal_info()" >Next Step</button>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+            <!-- ******************************************** plan ***************************************** -->
+            <div id="plan_detail" class="menue_detail">
+                <h1>Select your plan</h1>
+                <p>You have the option of monthly or yearly billing</p>
+                <div id="monthly" class="plan_time" >
+                    <div id="arcade" class="monthly_option" onclick="planSelection()">
+                        <div>
+                            <img src="i.png">
+                        </div>
+                        <input type="radio" style="visibility: hidden;" id="arcade_selection_mon" value="9" class="plan">
+                        <h4 id="arcade_h">Arcade</h4>
+                        <p>$9/mon</p>
+                    </div>
+                    <div id="advance" class="monthly_option" onclick="planSelection(advance_selection_mon,this)">
+                        <div>
+                            <img src="i.png">
+                        </div>
+                        <input type="radio" style="visibility: hidden;" id="advance_selection_mon" value="12" class="plan">
+                        <h4 id="advance_h">Advance</h4>
+                        <p>$12/mon</p>
+                    </div>
+                    <div id="pro" class="monthly_option" onclick="planSelection(pro_selection_mon,this)">
+                        <div>
+                            <img src="i.png">
+                        </div>
+                        <input type="radio" style="visibility: hidden;" id="pro_selection_mon" value="15" class="plan">
+                        <h4 id="pro_h">Pro</h4>
+                        <p>$15/mon</p>
+                    </div>
+                </div>
+                <div id="yearly" class="plan_time">
+                    <div id="arcade" class="yearly_option" onclick="planSelection(arcade_selection_yearly,this)">
+                        <div>
+                            <img src="i.png">
+                        </div>
+                        <input type="radio" style="visibility: hidden;" id="arcade_selection_yearly" value="110" class="plan">
+                        <h4>Arcade</h4>
+                        <p>$110/mon</p>
+                    </div>
+                    <div id="advance" class="yearly_option" onclick="planSelection(advance_selection_yearly,this)">
+                        <div>
+                            <img src="i.png">
+                        </div>
+                        <input type="radio" style="visibility: hidden;" id="advance_selection_yearly" value="220" class="plan">
+                        <h4>Advance</h4>
+                        <p>$220/mon</p>
+                    </div>
+                    <div id="pro" class="yearly_option" onclick="planSelection(pro_selection_yearly,this)">
+                        <div>
+                            <img src="i.png">
+                        </div>
+                        <input type="radio" style="visibility: hidden;" id="pro_selection_yearly" value="350" class="plan">
+                        <h4>Pro</h4>
+                        <p>$350/mon</p>
+                    </div>
+                </div>
+                <div id="selector">
+                    <button id="mon" onclick="toogle_plan_yearly()">Monthly</button>
+                    <span id="toogle_out" onclick="toogle_plan_yearly()">
+                        <span id="toogle_in">
+                            &nbsp;&nbsp;&nbsp;
+                        </span>
+                    </span>
+                    <button id="year" onclick="toogle_plan_yearly()">Yearly</button>
+                </div>
+                <div id="back_next_button">
+                    <button id="back" onclick="back_button_todisplay_personal_and_hide_plan_info()">Go Back</button>
+                    <button id="next" onclick="display_ons_and_hide_plan_info()">Next Step</button>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+            <!-- ******************************************* add_ons ************************************** -->
+            <div id="add_ons_detail" class="menue_detail">
+                <h1>Pick add-ons</h1>
+                <p>Add-ons help enhance your gaming experience.</p>
+                <div id="all_services">
+                    <button value="1" class="btn_services" id="btn_online">
+                        <div id="online_services" class="service">
+                            <div class="check_box">
+                                <input type="checkbox" id="check_online" onchange="styleOnline()" value="1">
+                            </div>
+                            <div id="online_detail" class="services_detail">
+                                <h3 for="check_online" id="online_h">Online Service</h3>
+                                <label for="check_online">Access to multiplayer games</label>
+                            </div>
+                            <div id="online_amount" class="service_amount">
+                                +$1/mon
+                            </div>
+                            <div style="clear: both;"></div>
+                        </div>
+                    </button>
+                    <button value="2" class="btn_services" id="btn_storage">
+                        <div id="larger_storage" class="service">
+                            <div class="check_box">
+                                <input type="checkbox" id="check_storage" onchange="styleStorage()" value="2">
+                            </div>
+                            <div id="storage_detail" class="services_detail">
+                                <h3 for="check_storage" id="storage_h">Larger Storage</h3>
+                                <label for="check_storage">Extra TTB of cloud save</label>
+                            </div>
+                            <div id="storage_amount" class="service_amount">
+                                +$2/mon
+                            </div>
+                            <div style="clear: both;"></div>
+                        </div>
+                    </button>
+                    <button value="3" class="btn_services" id="btn_customizable">
+                        <div id="customizable profile" class="service">
+                            <div class="check_box">
+                                <input type="checkbox" id="check_customize" onchange="stylecustomize()" value="3">
+                            </div>
+                            <div id="customize_detail" class="services_detail">
+                                <h3 for="check_customize" id="custom_h">Customizable Profile</h3>
+                                <label for="check_customize">Custom there on your profile</label>
+                            </div>
+                            <div id="customizable_amount" class="service_amount">
+                                +$3/mon
+                            </div>
+                            <div style="clear: both;"></div>
+                        </div>
+                    </button>
+                </div>
+                <div id="back_next_button">
+                    <button id="back" onclick="back_button_todisplay_plan_and_hide_ons()">Go Back</button>
+                    <button id="next" onclick="next_button_todisplay_summary_and_hide_ons()">Next Step</button>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+            <!-- ****************************************** summary ***************************************-->
+            <div id="summary_detail" class="menue_detail test">
+                <h1>Finishing Up</h1>
+                <p>Double-check everything looks OK before confirming</p>
+                <div id="summary_table">
+                    <table id="data_table">
+                       <tr>
+                        <td id="plans"></td>
+                        <td id="p_amount"></td>
+                       </tr>
+                    </table>
+                </div>
+                <div id="back_next_button">
+                    <button id="back" onclick="back_button_todisplay_ons_and_hide_summary()">Go Back</button>
+                    <button id="confirm" onclick="savedataConfirm()">Confirm</button>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        </div>
+        <div style="clear: both;"></div>
+    </div>
+    <script>
+        var total=0;    // total of the selected plans
+
+        // function test(e)
+        // {
+        //     e.style.color = 'red'
+        // }
+        function planStyling(input_field, section_plan)
+        {
+            var monthly_plans = document.getElementsByClassName('monthly_option');
+            var yearly_plans = document.getElementsByClassName('yearly_option');
+            var input_sections = document.getElementsByClassName('plan');
+            for(i=0; i<monthly_plans.length; i++)
+            {
+                monthly_plans[i].style.backgroundColor = 'none';
+                yearly_plans[i].style.backgroundColor = 'none';
+            }
+            for(i=0; i<input_sections.length; i++)
+            {
+                input_sections[i].checked = false;
+            }
+                if((input_field.checked) == false)
+                {
+                    input_field.checked = true;
+                    console.log(input_field.checked);
+                    section_plan.style.backgroundColor = 'rgba(231, 238, 243, 0.864)';
+                }
+                else{
+                    input_field.checked = false;
+                    console.log(input_field.checked);
+                    section_plan.style.backgroundColor = 'none';
+                }
+        }
+
+        //     setAttribute('class','active') change the value of an attribute 
+        //      1: name of an attribute 
+        //      2: value of an attribute
+        //    check_class= getAttribute('class')
+        //    prop()
+        //    dataset   property for setting name
+
+        // innerText  , textContent == advance
+
+        function planSelection()
+        {
+            var selectArcade =  document.getElementById('arcade_selection');
+            var arcade_section = document.getElementById('arcade');
+            var selectAdvance =  document.getElementById('advance_selection');
+            var advace_section = document.getElementById('advance');
+            var selectpro =  document.getElementById('pro_selection');
+            var pro_section = document.getElementById('pro');
+            var plans = document.getElementById('plans');
+            var plans_amount = document.getElementById('p_amount');
+            var heading_arcade = document.getElementById('arcade_h');
+            if(selectArcade.checked == true)
+            {
+                selectArcade.checked=false;
+                arcade_section.style.background = 'none';
+                total -= Number(selectArcade.value);
+            }
+            else if(selectAdvance.checked == true)
+            {
+                selectAdvance.checked=false;
+                advace_section.style.background = 'none';
+                total -= Number(selectAdvance.value);
+            }
+            else if(selectpro.checked == true)
+            {
+                selectpro.checked =false;
+                pro_section.style.background = 'none';
+                total -= Number(selectpro.value);
+            }
+            else if(selectAdvance.checked == false)
+            {    
+                if(selectArcade.checked == true || selectpro.checked == true || selectArcade.checked == false || selectpro.checked == false)
+                {
+                    selectAdvance.checked = true;
+                    advace_section.style.backgroundColor = 'rgba(231, 238, 243, 0.864)';
+                    if(selectAdvance.checked == true)
+                    {
+                        plans.innerHTML = heading_advance.innerHTML;
+                        plans_amount.innerHTML = '$' + selectAdvance.value + '/mon';
+                        total+= Number(selectAdvance.value);
+                    }
+                    selectArcade.checked = false;
+                    arcade_section.style.background = 'none';
+                    selectpro.checked = false;
+                    pro_section.style.background = 'none';
+                    return true;
+                }
+            }
+            else if(selectArcade.checked == false)
+            {
+                if(selectAdvance.checked == true || selectpro.checked == true || selectAdvance.checked == false || selectpro.checked == false)
+                {
+                    selectArcade.checked = true;
+                    arcade_section.style.backgroundColor = 'rgba(231, 238, 243, 0.864)';
+                    if(selectArcade.checked == true)
+                    {
+                        plans.innerHTML = heading_arcade.innerHTML;
+                        plans_amount.innerHTML = '$' + selectArcade.value +'/mon';
+                        total += Number(selectArcade.value);
+                    }
+                    selectAdvance.checked = false;
+                    advace_section.style.background = 'none';
+                    selectpro.checked = false;
+                    pro_section.style.background = 'none';
+                }
+            }
+            else if(selectpro.checked ==false)
+            {
+                if(selectAdvance.checked == true || selectArcade.checked == true || selectAdvance.checked ==false || selectArcade.checked ==false)
+                {
+                    selectpro.checked = true;
+                    pro_section.style.backgroundColor = 'rgba(231, 238, 243, 0.864)';
+                    if(selectpro.checked == true)
+                    {
+                        plans.innerHTML = heading_arcade.innerHTML;
+                        plans_amount.innerHTML = '$' + selectArcade.value +'/mon';
+                        total += Number(selectArcade.value);
+                    }
+                    selectAdvance.checked = false;
+                    advace_section.style.background = 'none';
+                    selectArcade.checked = false;
+                    arcade_section.style.background = 'none';
+                }
+            }
+        }
+        function advanceStyling(advace_section)
+        {
+            var selectArcade =  document.getElementById('arcade_selection');
+            var arcade_section = document.getElementById('arcade');
+            var selectAdvance =  document.getElementById('advance_selection');
+            //var advace_section = document.getElementById('advance');
+            var selectpro =  document.getElementById('pro_selection');
+            var pro_section = document.getElementById('pro'); 
+            var plans = document.getElementById('plans');
+            var plans_amount = document.getElementById('p_amount');
+            var heading_advance = document.getElementById('advance_h');
+            
+        }
+        function proStyling(pro_section)
+        {
+            var selectArcade =  document.getElementById('arcade_selection');
+            var arcade_section = document.getElementById('arcade');
+            var selectAdvance =  document.getElementById('advance_selection');
+            var advace_section = document.getElementById('advance');
+            var selectpro =  document.getElementById('pro_selection');
+            var pro_section = document.getElementById('pro'); 
+            var plans = document.getElementById('plans');
+            var plans_amount = document.getElementById('p_amount');
+            var heading_pro = document.getElementById('pro_h');
+            if(selectpro.checked == true)
+            {
+                selectpro.checked=false;
+                pro_section.style.background = 'none';
+                total -= Number(selectpro.value);
+                return false;
+            }
+            else{
+                
+                if(selectAdvance.checked == true || selectArcade.checked==true || selectAdvance.checked == false || selectArcade.checked == false)
+                {
+                    selectpro.checked = true;
+                    pro_section.style.backgroundColor = 'rgba(231, 238, 243, 0.864)';
+                    if(selectpro.checked == true)
+                    {
+                        plans.innerHTML = heading_pro.innerHTML;
+                        plans_amount.innerHTML = '$' + selectpro.value +'/mon';
+                        total += Number(selectpro.value);
+                    }
+                    selectAdvance.checked = false;
+                    advace_section.style.background = 'none';
+                    selectArcade.checked = false;
+                    arcade_section.style.background = 'none';
+                    return true;
+                }
+            }
+        }
+        function nameError()
+        {
+            var name = document.getElementById('name');
+            var name_alert = document.getElementById('name_error');
+            if(name.value == '')
+            {
+                name_alert.innerHTML = 'Kindly enter your name.';
+                name_alert.style.color = 'red';
+                name.style.borderColor = 'red';
+                return false;
+            }
+            else{
+                name_alert.innerHTML = '';
+                name.style.borderColor = 'green';
+                return true;
+            }
+            return false;
+        }
+        function emailError()
+        {
+            var email = document.getElementById('email');
+            var email_alert = document.getElementById('email_error');
+            if(!email.value.includes('@gmail.com'))
+            {
+                email_alert.innerHTML = 'Email must contain @gmail.com.';
+                email_alert.style.color = 'red';
+                email.style.borderColor = 'red';
+                return false
+            }
+            else if(email.value=='')
+            {
+                email_alert.innerHTML = 'Email is required.';
+                email_alert.style.color = 'red';
+                email.style.borderColor = 'red';
+                return false
+            }
+            else{
+                email_alert.innerHTML = '';
+                email.style.borderColor = 'green';
+                return true
+            }
+            return false;
+        }
+        function phoneNoError()
+        {
+            var phoneNo = document.getElementById('phoneNumber');
+            var phoneNo_alert = document.getElementById('phoneNo_error');
+            if(phoneNo.value=='')
+            {
+                phoneNo_alert.innerHTML = 'Phone Number is required.';
+                phoneNo_alert.style.color = 'red';
+                phoneNo.style.borderColor = 'red';
+                return false;
+            }
+            else if(phoneNo.value.length < 11 || phoneNo.value.length > 11)
+            {
+                phoneNo_alert.innerHTML = 'Follow correct formate.';
+                phoneNo_alert.style.color = 'red';
+                phoneNo.style.borderColor = 'red';
+                return false
+            }
+            else
+            {
+                phoneNo_alert.innerHTML = '';
+                phoneNo.style.borderColor = 'green';
+                return true;
+            }
+            return false;
+        }
+        function styleOnline()
+        {
+            var button_field = document.getElementById('btn_online');
+            var online_field = document.getElementById('check_online');
+            var table_data = document.getElementById('data_table');
+            var heading_online = document.getElementById('online_h');
+            //console.log(online_field.checked);
+            if(online_field.checked == true)
+            {
+                button_field.style.backgroundColor = 'rgba(231, 238, 243, 0.864)';
+                table_data.innerHTML += `
+                <tr>
+                    <td> ${heading_online.innerHTML} </td>
+                    <td> $${online_field.value}/mon </td>
+                </tr>
+                `
+                total += Number(online_field.value);
+            }
+            else{
+                table_data.innerHTML = '';
+                total -= Number(online_field.value);
+            }
+        }
+        function styleStorage()
+        {
+            var button_field = document.getElementById('btn_storage');
+            var table_data = document.getElementById('data_table');
+            var storage_field = document.getElementById('check_storage');
+            var heading_storage = document.getElementById('storage_h');
+            //console.log(storage_field.checked);
+            if(storage_field.checked == true)
+            {
+                button_field.style.backgroundColor = 'rgba(231, 238, 243, 0.864)';
+                table_data.innerHTML += `
+                <tr>
+                    <td> ${heading_storage.innerHTML} </td>
+                    <td> $${storage_field.value}/mon </td>
+                </tr>
+                `
+                total += Number(storage_field.value);
+            }
+            else{
+                table_data.innerHTML += '';
+                total -= Number(storage_field.value);
+            }
+        }
+        function stylecustomize()
+        {
+            var button_field = document.getElementById('btn_customizable');
+            var table_data = document.getElementById('data_table');
+            var customize_field = document.getElementById('check_customize');
+            var heading_cutomize = document.getElementById('custom_h');
+            //console.log(customize_field.checked);
+            if(customize_field.checked == true)
+            {  
+                
+                button_field.style.backgroundColor = 'rgba(231, 238, 243, 0.864)';
+                table_data.innerHTML += `
+                <tr>
+                    <td> ${heading_cutomize.innerHTML} </td>
+                    <td> $${customize_field.value}/mon </td>
+                </tr>
+                `
+                total += Number(customize_field.value); 
+            }
+            else{
+                table_data.innerHTML += '';
+                total -= Number(customize_field.value);
+            }
+        }
+        function display_plan_and_hide_personal_info()
+        {
+            var personal_details = document.getElementById('personal_detail');
+            var plan_details = document.getElementById('plan_detail');
+            var info_selection = document.getElementById('info_selector');
+            var info_para = document.getElementById('info_p');
+            var info_heading = document.getElementById('info_h');
+            var plan_info_para = document.getElementById('plan_p');
+            var plan_info_heading = document.getElementById('plan_h');
+            var plan_selection = document.getElementById('plan_selector');
+            if(nameError() && emailError() && phoneNoError())
+            {
+                personal_details.style.display='none';
+                plan_details.style.display = 'block'; 
+                info_selection.style.background = 'none';
+                plan_info_para.style.color = 'navy';
+                plan_info_heading.style.color = 'navy';
+                plan_selection.style.backgroundColor = 'navy';
+                info_para.style.color = 'white';
+                info_heading.style.color = 'white';
+            }
+        }
+        function back_button_todisplay_personal_and_hide_plan_info()
+        {
+            var personal_details = document.getElementById('personal_detail');
+            var plan_details = document.getElementById('plan_detail');
+            var info_selection = document.getElementById('info_selector');
+            var info_para = document.getElementById('info_p');
+            var info_heading = document.getElementById('info_h');
+            var plan_info_para = document.getElementById('plan_p');
+            var plan_info_heading = document.getElementById('plan_h');
+            var plan_selection = document.getElementById('plan_selector');
+            personal_details.style.display='block';
+            plan_details.style.display = 'none'; 
+            info_selection.style.background = 'navy';
+            plan_info_para.style.color = 'white';
+            plan_info_heading.style.color = 'white';
+            plan_selection.style.background = 'none';
+            info_para.style.color = 'navy';
+            info_heading.style.color = 'navy';
+        }
+        function display_ons_and_hide_plan_info()
+        {
+            var ons_details = document.getElementById('add_ons_detail');
+            var plan_details = document.getElementById('plan_detail');
+            var ons_selection = document.getElementById('ons_selector');
+            var ons_para = document.getElementById('ons_p');
+            var ons_heading = document.getElementById('ons_h');
+            var plan_info_para = document.getElementById('plan_p');
+            var plan_info_heading = document.getElementById('plan_h');
+            var plan_selection = document.getElementById('plan_selector');
+                ons_details.style.display='block';
+                plan_details.style.display = 'none'; 
+                ons_selection.style.background = 'navy';
+                plan_info_para.style.color = 'white';
+                plan_info_heading.style.color = 'white';
+                plan_selection.style.background = 'none';
+                ons_para.style.color = 'navy';
+                ons_heading.style.color = 'navy';
+        }
+        function back_button_todisplay_plan_and_hide_ons()
+        {
+            var ons_details = document.getElementById('add_ons_detail');
+            var plan_details = document.getElementById('plan_detail');
+            var ons_selection = document.getElementById('ons_selector');
+            var ons_para = document.getElementById('ons_p');
+            var ons_heading = document.getElementById('ons_h');
+            var plan_info_para = document.getElementById('plan_p');
+            var plan_info_heading = document.getElementById('plan_h');
+            var plan_selection = document.getElementById('plan_selector');
+            ons_details.style.display='none';
+            plan_details.style.display = 'block'; 
+            ons_selection.style.background = 'none';
+            plan_info_para.style.color = 'navy';
+            plan_info_heading.style.color = 'navy';
+            plan_selection.style.background = 'navy';
+            ons_para.style.color = 'white';
+            ons_heading.style.color = 'white';
+        }
+        function next_button_todisplay_summary_and_hide_ons()
+        {
+            var ons_details = document.getElementById('add_ons_detail');
+            var summary_details = document.getElementById('summary_detail');
+            var ons_selection = document.getElementById('ons_selector');
+            var ons_para = document.getElementById('ons_p');
+            var ons_heading = document.getElementById('ons_h');
+            var summary_info_para = document.getElementById('summary_p');
+            var summary_info_heading = document.getElementById('summary_h');
+            var summary_selection = document.getElementById('summary_selector');
+            var table_data = document.getElementById('data_table');
+            ons_details.style.display='none';
+            summary_details.style.display = 'block'; 
+            ons_selection.style.background = 'none';
+            summary_info_para.style.color = 'navy';
+            summary_info_heading.style.color = 'navy';
+            summary_selection.style.background = 'navy';
+            ons_para.style.color = 'white';
+            ons_heading.style.color = 'white';
+            table_data.innerHTML += `
+                <tr>
+                    <td> Total </td>
+                    <td> $${total}/mon </td>
+                </tr>
+                `
+        }
+        function back_button_todisplay_ons_and_hide_summary()
+        {
+            var ons_details = document.getElementById('add_ons_detail');
+            var summary_details = document.getElementById('summary_detail');
+            var ons_selection = document.getElementById('ons_selector');
+            var ons_para = document.getElementById('ons_p');
+            var ons_heading = document.getElementById('ons_h');
+            var summary_info_para = document.getElementById('summary_p');
+            var summary_info_heading = document.getElementById('summary_h');
+            var summary_selection = document.getElementById('summary_selector');
+            ons_details.style.display='block';
+            summary_details.style.display = 'none'; 
+            ons_selection.style.background = 'navy';
+            summary_info_para.style.color = 'white';
+            summary_info_heading.style.color = 'white';
+            summary_selection.style.background = 'none';
+            ons_para.style.color = 'navy';
+            ons_heading.style.color = 'navy';
+        }
+        function toogle_plan_yearly()
+        {
+            var monthly_plan = document.getElementById('monthly');
+            var yearly_plan = document.getElementById('yearly');
+            var year = document.getElementById('year');
+            var toogle_out = document.getElementById('toogle_out');
+            var toogle_in = document.getElementById('toogle_in');
+            var mon = document.getElementById('mon');
+            
+            if(monthly_plan.style.display=='none')
+            {
+                monthly_plan.style.display = 'block';
+                yearly_plan.style.display = 'none';
+                toogle_out.style.padding = '2% 7% 2% 1%';
+                mon.style.color = 'white';
+                mon.style.backgroundColor = 'navy';
+                year.style.color = 'black';
+                year.style.backgroundColor = 'rgba(254, 251, 251, 0.802)';
+            }
+            else{
+                monthly_plan.style.display = 'none';
+                yearly_plan.style.display = 'block';
+                toogle_out.style.padding = '2% 1% 2% 7%';
+                year.style.color = 'white';
+                year.style.backgroundColor = 'navy';
+                mon.style.color = 'black';
+                mon.style.backgroundColor = 'rgba(254, 251, 251, 0.802)';
+            }
+            // data variables of plans
+            var selectArcade =  document.getElementById('arcade_selection');
+            var arcade_section = document.getElementById('arcade');
+            var selectAdvance =  document.getElementById('advance_selection');
+            var advace_section = document.getElementById('advance');
+            var selectpro =  document.getElementById('pro_selection');
+            var pro_section = document.getElementById('pro');
+            if(selectArcade.checked == true || selectAdvance.checked == true || selectpro.checked == true)
+            {
+                selectAdvance.checked = false;
+                selectArcade.checked = false;
+                selectpro.checked = false;
+                arcade_section.style.background = 'none';
+                advace_section.style.background = 'none';
+                pro_section.style.background = 'none';
+            }
+        }
+
+        // Data attribute functionality in js, how to use and access its value
+
+        // var services_data   = document.getElementsByClassName('services');
+
+        // for(i > services.le)
+        // {
+        //     if(service[i].name == 'plan')
+        // }
+
+    </script>
+</body>
+</html>
