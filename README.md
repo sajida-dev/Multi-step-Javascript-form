@@ -24,4 +24,4 @@ To use the **JavaScript Multistep Form** locally:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/your-repository-name.git
+   git clone https://github.com/sajida-dev/Multi-step-Javascript-form.git
